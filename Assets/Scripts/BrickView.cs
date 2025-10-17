@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BrickView : MonoBehaviour
 {
-    // Start is called before the first frame update
+    BrickController _brickController;
+    
     void Start()
     {
-        
+        _brickController = GetComponent<BrickController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public void PerformTakeDamage(float damage){
+    _brickController.TakeDamage(damage);
+}
+
 }

@@ -15,7 +15,7 @@ public class BallController : MonoBehaviour
 
     public void AngleChange(Vector2 dir){
         _ballModel.Direction = dir;
-        _ballRigidbody.linearVelocity = dir * _ballModel.Speed;
+        _ballRigidbody.velocity  = dir * _ballModel.Speed;
     }
 
     public void PerfectAngleReflect(Collision2D collision){

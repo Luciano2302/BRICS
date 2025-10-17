@@ -1,16 +1,11 @@
+using System;
 using UnityEngine;
 
-public class BrickView : MonoBehaviour
+public class BrickModel : MonoBehaviour
 {
-    BrickController _brickController;
-    
-    void Start()
-    {
-        _brickController = GetComponent<BrickController>();
-    }
 
-public void PerformTakeDamage(float damage){
-    _brickController.TakeDamage(damage);
-}
+    [SerializeField]private float _health;
+
+     public float Health {get => _health; set => _health = value;}
 
 }
