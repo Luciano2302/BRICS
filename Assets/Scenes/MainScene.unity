@@ -488,6 +488,92 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275297306}
   m_CullTransparentMesh: 1
+--- !u!1 &301825792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301825794}
+  - component: {fileID: 301825793}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &301825793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301825792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe64e843706bae042886bbf76015c65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brickDestroy:
+    name: 
+    clip: {fileID: 8300000, guid: d3e651cf5aab2be40bfe62bd794229c1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  playerCollision:
+    name: 
+    clip: {fileID: 8300000, guid: 6fa8b0a0720420a41b71355aa17b5a16, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  levelComplete:
+    name: 
+    clip: {fileID: 8300000, guid: c47a4e7d20ea32949bbc57b0fd851a25, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  gameOver:
+    name: 
+    clip: {fileID: 8300000, guid: e4353309418a7bd47b3770593628cccb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  victory:
+    name: 
+    clip: {fileID: 8300000, guid: 95df8260dd7b4454680759cb18d357c6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  backgroundMusic:
+    name: 
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &301825794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301825792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1026.3158, y: 526.445, z: -5.244756}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &378337726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1330,12 @@ MonoBehaviour:
   scoreText: {fileID: 275297308}
   livesText: {fileID: 652004483}
   levelText: {fileID: 378337728}
+  brickDestroySound: {fileID: 0}
+  playerCollisionSound: {fileID: 0}
+  levelCompleteSound: {fileID: 0}
+  gameOverSound: {fileID: 0}
+  victorySound: {fileID: 0}
+  backgroundMusic: {fileID: 0}
 --- !u!4 &1489279845
 Transform:
   m_ObjectHideFlags: 0

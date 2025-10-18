@@ -7,8 +7,16 @@ public class BrickController : MonoBehaviour
     void Start()
     {
         _brickModel = GetComponent<BrickModel>();
+        
+        // Verifica se o brick tem health válido
+        if (_brickModel != null && _brickModel.Health <= 0)
+        {
+            Debug.LogWarning("Brick criado com health <= 0: " + gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
+    // Aplica dano ao brick
     public void TakeDamage(float damage)
     {
         if(_brickModel == null)
@@ -16,25 +24,28 @@ public class BrickController : MonoBehaviour
             _brickModel = GetComponent<BrickModel>();
         }
         
+        // Aplica o dano
         _brickModel.Health -= damage;
     
+        // Verifica se o brick foi destruído
         if(_brickModel.Health <= 0)
         {
             DestroyBrick();
         }
     }
 
-   private void DestroyBrick()
-{
-    Debug.Log("Destruindo brick: " + gameObject.name);
-    
-    // ⭐ AVISA GameManager PRIMEIRO
-    if(GameManager.Instance != null)
+    // Destroi o brick
+    private void DestroyBrick()
     {
-        GameManager.Instance.BrickDestroyed();
+        Debug.Log("Destruindo brick: " + gameObject.name);
+        
+        // Notifica o GameManager ANTES de destruir
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.BrickDestroyed();
+        }
+        
+        // Destroi o objeto
+        Destroy(gameObject);
     }
-    
-    // ⭐ DEPOIS destrói
-    Destroy(gameObject);
-}
 }
