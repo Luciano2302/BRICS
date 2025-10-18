@@ -10,7 +10,8 @@ public class BrickView : MonoBehaviour
     }
 
 public void PerformTakeDamage(float damage){
+     Debug.Log("Brick levou dano: " + damage);
     _brickController.TakeDamage(damage);
-}
+ }
 
 }

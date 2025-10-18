@@ -2,20 +2,39 @@ using UnityEngine;
 
 public class BrickController : MonoBehaviour
 {
-    BrickModel _brickModel;
+    private BrickModel _brickModel;
 
     void Start()
     {
-        _brickModel = GetComponent<BrickModel>();    
+        _brickModel = GetComponent<BrickModel>();
     }
 
-    public void TakeDamage(float damage){
-          _brickModel.Health = _brickModel.Health - damage;
+    public void TakeDamage(float damage)
+    {
+        if(_brickModel == null)
+        {
+            _brickModel = GetComponent<BrickModel>();
+        }
+        
+        _brickModel.Health -= damage;
     
-        if(_brickModel.Health <= 0){
-          // AVISAR GameManager que brick foi destruído
-          GameManager.Instance.BrickDestroyed();
-          Destroy(gameObject);
+        if(_brickModel.Health <= 0)
+        {
+            DestroyBrick();
         }
     }
+
+   private void DestroyBrick()
+{
+    Debug.Log("Destruindo brick: " + gameObject.name);
+    
+    // ⭐ AVISA GameManager PRIMEIRO
+    if(GameManager.Instance != null)
+    {
+        GameManager.Instance.BrickDestroyed();
+    }
+    
+    // ⭐ DEPOIS destrói
+    Destroy(gameObject);
+}
 }

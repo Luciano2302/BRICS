@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int currentScore = 0;
     public int playerLives = 3;
     public int currentLevel = 1;
-    public int bricksCount = 0;
+    private int totalBricks = 0;
     
     [Header("UI References")]
     public Text scoreText;
@@ -22,11 +22,12 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager Instance criada!");
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
     
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         CountBricks();
         UpdateUI();
+        Debug.Log("GameManager iniciado! Bricks: " + totalBricks);
     }
     
     public void AddScore(int points)
@@ -51,47 +53,105 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-        else
-        {
-            // Recriar bola na próxima implementação
-        }
     }
     
     public void BrickDestroyed()
     {
-        bricksCount--;
-        AddScore(10); // Pontos por destruir tijolo
+        // ⭐⭐ DEBUG DETALHADO
+        int realBricks = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        totalBricks = realBricks;
         
-        if (bricksCount <= 0)
+        AddScore(10);
+        
+        Debug.Log("=== BRICK DESTRUÍDO ===");
+        Debug.Log("Bricks reais na cena: " + realBricks);
+        Debug.Log("Score: " + currentScore);
+        Debug.Log("Current Level: " + currentLevel);
+        
+        // ⭐⭐ LISTA TODOS OS BRICKS RESTANTES
+        GameObject[] remainingBricks = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("=== BRICKS RESTANTES ===");
+        foreach(GameObject brick in remainingBricks)
         {
-            AddScore(100); // Bônus por completar fase
+            Debug.Log("Brick: " + brick.name + " ativo: " + brick.activeInHierarchy);
+        }
+        Debug.Log("=== FIM DA LISTA ===");
+        
+        if (realBricks <= 0) 
+        {
+            Debug.Log("🎉🎉🎉 TODOS OS BRICKS DESTRUÍDOS! Level Complete!");
+            LevelComplete();
+        }
+        else
+        {
+            Debug.Log("Ainda faltam " + realBricks + " bricks para completar o nível");
+        }
+    }
+
+    void CountBricks()
+    {
+        totalBricks = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        Debug.Log("Total de bricks inicial: " + totalBricks);
+    }
+    
+    public void PlayerCollision()
+    {
+        AddScore(-5);
+    }
+    
+    void LevelComplete()
+    {
+        Debug.Log("=== INICIANDO LEVELCOMPLETE ===");
+        AddScore(100);
+        currentLevel++;
+        
+        Debug.Log("Novo nível: " + currentLevel);
+        
+        if (currentLevel > 2) 
+        {
+            Debug.Log("VITÓRIA - Todas as fases completas!");
+            WinGame();
+        }
+        else
+        {
+            Debug.Log("Carregando próxima fase: Level" + currentLevel);
             LoadNextLevel();
         }
     }
     
-    void CountBricks()
+    void LoadNextLevel()
     {
-        bricksCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    }
-    
-    public void LoadNextLevel()
-    {
-        currentLevel++;
-        // Por enquanto, recarregar a mesma cena
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        CountBricks();
-    }
-    
-    void UpdateUI()
-    {
-        if (scoreText) scoreText.text = "Score: " + currentScore;
-        if (livesText) livesText.text = "Lives: " + playerLives;
-        if (levelText) levelText.text = "Level: " + currentLevel;
+        string sceneName = "Level" + currentLevel;
+        Debug.Log("Tentando carregar cena: " + sceneName);
+        
+        // ⭐ VERIFICA se a cena existe
+        if (Application.CanStreamedLevelBeLoaded(sceneName))
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogError("CENA NÃO ENCONTRADA: " + sceneName);
+            Debug.Log("Indo para vitória como fallback...");
+            WinGame();
+        }
     }
     
     void GameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("GameOverScene");
+    }
+    
+    void WinGame()
+    {
+        SceneManager.LoadScene("WinnerScene");
+    }
+    
+    void UpdateUI()
+    {
+        if (scoreText != null) scoreText.text = "Score: " + currentScore;
+        if (livesText != null) livesText.text = "Lives: " + playerLives;
+        if (levelText != null) levelText.text = "Level: " + currentLevel;
     }
     
     public void RestartGame()
@@ -102,8 +162,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
     
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+    
     public void QuitGame()
     {
         Application.Quit();
+        
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
