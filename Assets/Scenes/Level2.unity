@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a4f11686f9c4f4ab89a871396f4c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.1
+  _speed: 5
   _life: 3
   _scale: 1
 --- !u!61 &142954531
@@ -1999,6 +1999,12 @@ MonoBehaviour:
   scoreText: {fileID: 275297308}
   livesText: {fileID: 652004483}
   levelText: {fileID: 378337728}
+  brickDestroySound: {fileID: 0}
+  playerCollisionSound: {fileID: 0}
+  levelCompleteSound: {fileID: 0}
+  gameOverSound: {fileID: 0}
+  victorySound: {fileID: 0}
+  backgroundMusic: {fileID: 0}
 --- !u!4 &1489279845
 Transform:
   m_ObjectHideFlags: 0
