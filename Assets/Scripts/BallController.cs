@@ -32,12 +32,6 @@ public class BallController : MonoBehaviour
             brickView.PerformTakeDamage(1f);
         }
         
-        // Avisa o GameManager
-        if(GameManager.Instance != null)
-        {
-            GameManager.Instance.BrickDestroyed();
-        }
-        
         // Reflexão
         _ballView.ReflectBall(collision, _ballModel.Direction, _ballModel.Speed);
     }
