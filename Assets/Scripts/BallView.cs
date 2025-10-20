@@ -4,7 +4,7 @@ public class BallView : MonoBehaviour
 {
     private BallController _ballController;
     private Rigidbody2D _rb;
-    public float minSpeed = 8f; // ⭐ AUMENTE para 8
+    public float minSpeed = 8f;
 
     void Start()
     {
@@ -36,14 +36,14 @@ public class BallView : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Wall"))
         {
-            // ⭐⭐ PAREDES: APENAS GARANTE VELOCIDADE, SEM REFLEXÃO MANUAL
+            // PAREDES: APENAS GARANTE VELOCIDADE, SEM REFLEXÃO MANUAL
             Debug.Log("-> Wall collision - Apenas ensure speed");
             EnsureMinimumSpeed();
             
-            // ⭐ DETECTA SE COLOU (velocidade zero após colisão)
+            //  DETECTA SE COLOU (velocidade zero após colisão)
             if(_rb.velocity.magnitude < 0.5f)
             {
-                Debug.Log("⚠️ BOLA COLOU NA PAREDE! Aplicando escape...");
+                Debug.Log("BOLA COLOU NA PAREDE! Aplicando escape...");
                 ApplyEscapeVelocity();
             }
         }
@@ -66,7 +66,7 @@ public class BallView : MonoBehaviour
         Vector2 normal = collision.contacts[0].normal;
         Vector2 reflectDir = Vector2.Reflect(direction.normalized, normal);
         
-        // ⭐ CORREÇÃO PARA ÂNGULOS PROBLEMÁTICOS
+        // CORREÇÃO PARA ÂNGULOS PROBLEMÁTICOS
         reflectDir = CorrectProblematicAngle(reflectDir);
         
         _rb.velocity = reflectDir * speed;
@@ -74,7 +74,7 @@ public class BallView : MonoBehaviour
         EnsureMinimumSpeed();
     }
     
-    // ⭐⭐ NOVO: CORRIGE ÂNGULOS QUE CAUSAM PROBLEMAS
+    //  NOVO: CORRIGE ÂNGULOS QUE CAUSAM PROBLEMAS
     private Vector2 CorrectProblematicAngle(Vector2 direction)
     {
         Vector2 corrected = direction;
@@ -98,7 +98,7 @@ public class BallView : MonoBehaviour
         return corrected.normalized;
     }
     
-    // ⭐⭐ NOVO: VELOCIDADE DE ESCAPE SE COLOU
+    // NOVO: VELOCIDADE DE ESCAPE SE COLOU
     private void ApplyEscapeVelocity()
     {
         Vector2 escapeDir = new Vector2(
@@ -126,7 +126,7 @@ public class BallView : MonoBehaviour
     {
         EnsureMinimumSpeed();
         
-        // ⭐ DEBUG: Monitora velocidade em tempo real
+        //  DEBUG: Monitora velocidade em tempo real
         if(Time.frameCount % 60 == 0) // A cada segundo aproximadamente
         {
             Debug.Log("Velocidade atual: " + _rb.velocity.magnitude);

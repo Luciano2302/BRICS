@@ -61,7 +61,7 @@ public class BallController : MonoBehaviour
 
     public void HandleWallCollision(Collision2D collision)
     {
-       // ⭐⭐ COMENTADO - O BallView agora cuida disso
+       //COMENTADO - O BallView agora cuida disso
     // NÃO FAZER NADA - o Rigidbody2D nativo + BallView resolvem
     
     Debug.Log("Wall collision handled by physics system");
@@ -79,7 +79,7 @@ public class BallController : MonoBehaviour
     Vector2 normal = collision.contacts[0].normal;
     Vector2 newDirection = Vector2.Reflect(currentDirection, normal);
     
-    // ⭐ Garante que a direção está normalizada
+    //Garante que a direção está normalizada
     newDirection = newDirection.normalized;
     
     AngleChange(newDirection);    }

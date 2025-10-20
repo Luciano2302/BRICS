@@ -93,11 +93,11 @@ public class PlayerControlller : MonoBehaviour
         // Debug quando encostar nas paredes
         if (hitLeftWall)
         {
-            Debug.Log($"🚫 ENCOSTOU PAREDE ESQUERDA - Player X: {newX:F2}, Limite: {_leftBound:F2}");
+            Debug.Log($"ENCOSTOU PAREDE ESQUERDA - Player X: {newX:F2}, Limite: {_leftBound:F2}");
         }
         else if (hitRightWall)
         {
-            Debug.Log($"🚫 ENCOSTOU PAREDE DIREITA - Player X: {newX:F2}, Limite: {_rightBound:F2}");
+            Debug.Log($" ENCOSTOU PAREDE DIREITA - Player X: {newX:F2}, Limite: {_rightBound:F2}");
         }
         
         // Debug ocasional

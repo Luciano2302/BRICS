@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         // Verifica se todos os bricks foram destruídos
         if (bricksDestroyed >= initialBrickCount) 
         {
-            Debug.Log("🎉🎉🎉 TODOS OS BRICKS DESTRUÍDOS! Level Complete!");
+            Debug.Log("TODOS OS BRICKS DESTRUÍDOS! Level Complete!");
             LevelComplete();
         }
         else

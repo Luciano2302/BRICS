@@ -554,7 +554,7 @@ MonoBehaviour:
     source: {fileID: 0}
   backgroundMusic:
     name: 
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9ee2637ecd54cdb49a69eae3d25df547, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -2336,7 +2336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: {x: 0.3, y: 1}
-  _speed: 8
+  _speed: 5
   _power: 1
 --- !u!50 &2116563886
 Rigidbody2D:
